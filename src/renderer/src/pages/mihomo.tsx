@@ -25,7 +25,13 @@ const CoreMap = {
 
 const Mihomo: React.FC = () => {
   const { appConfig, patchAppConfig } = useAppConfig()
-  const { core = 'mihomo', maxLogDays = 7, sysProxy } = appConfig || {}
+  const { 
+    core = 'mihomo',
+    maxLogDays = 7,
+    sysProxy,
+    disableLoopbackDetector,
+    skipSafePathCheck
+  } = appConfig || {}
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
   const {
     ipv6,
@@ -66,6 +72,17 @@ const Mihomo: React.FC = () => {
   const onChangeNeedRestart = async (patch: Partial<IMihomoConfig>): Promise<void> => {
     await patchControledMihomoConfig(patch)
     await restartCore()
+  }
+
+  const handleConfigChangeWithRestart = async (key: string, value: any) => {
+    try {
+      await patchAppConfig({ [key]: value })
+      await restartCore()
+    } catch (e) {
+      alert(e)
+    } finally {
+      PubSub.publish('mihomo-core-changed')
+    }
   }
 
   return (
@@ -116,14 +133,7 @@ const Mihomo: React.FC = () => {
               size="sm"
               selectedKeys={new Set([core])}
               onSelectionChange={async (v) => {
-                try {
-                  await patchAppConfig({ core: v.currentKey as 'mihomo' | 'mihomo-alpha' })
-                  await restartCore()
-                } catch (e) {
-                  alert(e)
-                } finally {
-                  PubSub.publish('mihomo-core-changed')
-                }
+                handleConfigChangeWithRestart('core', v.currentKey as 'mihomo' | 'mihomo-alpha')
               }}
             >
               <SelectItem key="mihomo">{CoreMap['mihomo']}</SelectItem>
@@ -631,6 +641,24 @@ const Mihomo: React.FC = () => {
               isSelected={storeFakeIp}
               onValueChange={(v) => {
                 onChangeNeedRestart({ profile: { 'store-fake-ip': v } })
+              }}
+            />
+          </SettingItem>
+          <SettingItem title="禁用回环检测器" divider>
+            <Switch
+              size="sm"
+              isSelected={disableLoopbackDetector}
+              onValueChange={(v) => {
+                handleConfigChangeWithRestart('disableLoopbackDetector', v)
+              }}
+            />
+          </SettingItem>
+          <SettingItem title="禁用安全路径检查" divider>
+            <Switch
+              size="sm"
+              isSelected={skipSafePathCheck}
+              onValueChange={(v) => {
+                handleConfigChangeWithRestart('skipSafePathCheck', v)
               }}
             />
           </SettingItem>

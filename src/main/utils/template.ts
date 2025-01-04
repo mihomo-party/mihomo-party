@@ -34,7 +34,8 @@ export const defaultConfig: IAppConfig = {
   ],
   siderWidth: 250,
   sysProxy: { enable: false, mode: 'manual' },
-  updateChannel: "release"
+  disableLoopbackDetector: false,
+  skipSafePathCheck: false
 }
 
 export const defaultControledMihomoConfig: Partial<IMihomoConfig> = {
