@@ -1,5 +1,5 @@
-appId: io.github.mihomo-party
-productName: Mihomo Party
+appId: io.github.mihomo-purity
+productName: Mihomo Purity
 directories:
   buildResources: build
 files:
@@ -19,7 +19,7 @@ extraResources:
   - from: './extra/'
     to: ''
 protocols:
-  name: 'Mihomo Party URI Scheme'
+  name: 'Mihomo Purity URI Scheme'
   schemes:
     - 'clash'
     - 'mihomo'
@@ -54,12 +54,12 @@ pkg:
     file: build/background.png
 linux:
   desktop:
-    Name: Mihomo Party
+    Name: Mihomo Purity
     MimeType: 'x-scheme-handler/clash;x-scheme-handler/mihomo'
   target:
     - deb
     - rpm
-  maintainer: mihomo-party
+  maintainer: mihomo-purity
   category: Utility
   artifactName: ${name}-linux-${version}-${arch}.${ext}
 deb:

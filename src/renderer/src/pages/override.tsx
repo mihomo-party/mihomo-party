@@ -131,7 +131,7 @@ const Override: React.FC = () => {
             isIconOnly
             className="app-nodrag"
             onPress={() => {
-              open('https://mihomo-party.github.io/docs/guide/override')
+              open('https://mihomo-purity.github.io/docs/guide/override')
             }}
           >
             <HiOutlineDocumentText className="text-lg" />
@@ -143,7 +143,7 @@ const Override: React.FC = () => {
             variant="light"
             size="sm"
             onPress={() => {
-              open('https://github.com/mihomo-party/override-hub')
+              open('https://github.com/mihomo-purity/override-hub')
             }}
           >
             <RiArchiveLine className="text-lg" />
@@ -210,14 +210,14 @@ const Override: React.FC = () => {
                   await addOverrideItem({
                     name: '新建YAML',
                     type: 'local',
-                    file: '# https://mihomo-party.github.io/docs/guide/override/yaml',
+                    file: '# https://mihomo-purity.github.io/docs/guide/override/yaml',
                     ext: 'yaml'
                   })
                 } else if (key === 'new-js') {
                   await addOverrideItem({
                     name: '新建JS',
                     type: 'local',
-                    file: '// https://mihomo-party.github.io/docs/guide/override/javascript\nfunction main(config) {\n  return config\n}',
+                    file: '// https://mihomo-purity.github.io/docs/guide/override/javascript\nfunction main(config) {\n  return config\n}',
                     ext: 'js'
                   })
                 }

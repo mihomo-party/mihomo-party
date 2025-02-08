@@ -13,7 +13,7 @@ import { promisify } from 'util'
 export async function checkUpdate(): Promise<IAppVersion | undefined> {
   const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
   const res = await axios.get(
-    'https://github.com/mihomo-party/mihomo-party/releases/latest/download/latest.yml',
+    'https://github.com/mihomo-purity/mihomo-purity/releases/latest/download/latest.yml',
     {
       headers: { 'Content-Type': 'application/octet-stream' },
       proxy: {
@@ -35,13 +35,13 @@ export async function checkUpdate(): Promise<IAppVersion | undefined> {
 
 export async function downloadAndInstallUpdate(version: string): Promise<void> {
   const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
-  const baseUrl = `https://github.com/mihomo-party/mihomo-party/releases/download/v${version}/`
+  const baseUrl = `https://github.com/mihomo-purity/mihomo-purity/releases/download/v${version}/`
   const fileMap = {
-    'win32-x64': `mihomo-party-windows-${version}-x64-setup.exe`,
-    'win32-ia32': `mihomo-party-windows-${version}-ia32-setup.exe`,
-    'win32-arm64': `mihomo-party-windows-${version}-arm64-setup.exe`,
-    'darwin-x64': `mihomo-party-macos-${version}-x64.pkg`,
-    'darwin-arm64': `mihomo-party-macos-${version}-arm64.pkg`
+    'win32-x64': `mihomo-purity-windows-${version}-x64-setup.exe`,
+    'win32-ia32': `mihomo-purity-windows-${version}-ia32-setup.exe`,
+    'win32-arm64': `mihomo-purity-windows-${version}-arm64-setup.exe`,
+    'darwin-x64': `mihomo-purity-macos-${version}-x64.pkg`,
+    'darwin-arm64': `mihomo-purity-macos-${version}-arm64.pkg`
   }
   let file = fileMap[`${process.platform}-${process.arch}`]
   if (isPortable()) {

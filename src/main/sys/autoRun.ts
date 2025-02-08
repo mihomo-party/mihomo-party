@@ -5,7 +5,7 @@ import { existsSync } from 'fs'
 import { promisify } from 'util'
 import path from 'path'
 
-const appName = 'mihomo-party'
+const appName = 'mihomo-purity'
 
 const taskXml = `<?xml version="1.0" encoding="UTF-16"?>
 <Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
@@ -42,7 +42,7 @@ const taskXml = `<?xml version="1.0" encoding="UTF-16"?>
   </Settings>
   <Actions Context="Author">
     <Exec>
-      <Command>"${path.join(taskDir(), `mihomo-party-run.exe`)}"</Command>
+      <Command>"${path.join(taskDir(), `mihomo-purity-run.exe`)}"</Command>
       <Arguments>"${exePath()}"</Arguments>
     </Exec>
   </Actions>
@@ -94,13 +94,13 @@ export async function enableAutoRun(): Promise<void> {
   if (process.platform === 'linux') {
     let desktop = `
 [Desktop Entry]
-Name=mihomo-party
+Name=mihomo-purity
 Exec=${exePath()} %U
 Terminal=false
 Type=Application
-Icon=mihomo-party
-StartupWMClass=mihomo-party
-Comment=Mihomo Party
+Icon=mihomo-purity
+StartupWMClass=mihomo-purity
+Comment=Mihomo Purity
 Categories=Utility;
 `
 

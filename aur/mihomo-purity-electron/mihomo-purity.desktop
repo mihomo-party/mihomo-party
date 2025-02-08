@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Mihomo Party
-Exec=mihomo-party %U
+Name=Mihomo Purity
+Exec=mihomo-purity %U
 Terminal=false
 Type=Application
-Icon=mihomo-party
-StartupWMClass=mihomo-party
+Icon=mihomo-purity
+StartupWMClass=mihomo-purity
 MimeType=x-scheme-handler/clash;x-scheme-handler/mihomo;
-Comment=Mihomo Party
+Comment=Mihomo Purity
 Categories=Utility;

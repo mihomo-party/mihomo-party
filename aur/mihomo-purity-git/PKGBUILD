@@ -1,14 +1,14 @@
-pkgname=mihomo-party-git
+pkgname=mihomo-purity-git
 _pkgname=${pkgname%-git}
 pkgver=0.1.3.r5.g5f5d6dd
 pkgrel=1
 pkgdesc="Another Mihomo GUI."
 arch=('x86_64' 'aarch64')
-url="https://github.com/mihomo-party/mihomo-party"
+url="https://github.com/mihomo-purity/mihomo-purity"
 license=('GPL3')
 conflicts=("$_pkgname" "$_pkgname-bin" "$_pkgname-electron" "$_pkgname-electron-bin")
 depends=('gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs' 'libsecret')
-optdepends=('libappindicator-gtk3: Allow mihomo-party to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
+optdepends=('libappindicator-gtk3: Allow mihomo-purity to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
 makedepends=('nodejs' 'pnpm' 'jq' 'libxcrypt-compat')
 install=$_pkgname.install
 source=("${_pkgname}.sh" "git+$url.git")
@@ -25,7 +25,7 @@ pkgver() {
 
 prepare(){
     cd $srcdir/${_pkgname}
-    sed -i "s/productName: Mihomo Party/productName: mihomo-party/" electron-builder.yml
+    sed -i "s/productName: Mihomo Purity/productName: mihomo-purity/" electron-builder.yml
     pnpm install
 }
 
@@ -36,13 +36,13 @@ build(){
 
 package() {
 	cd $srcdir/${_pkgname}/dist
-    bsdtar -xf mihomo-party-linux-$(jq '.version' $srcdir/${_pkgname}/package.json | tr -d 'v"')*.deb
+    bsdtar -xf mihomo-purity-linux-$(jq '.version' $srcdir/${_pkgname}/package.json | tr -d 'v"')*.deb
     bsdtar -xf data.tar.xz -C "${pkgdir}/"
-    chmod +x ${pkgdir}/opt/mihomo-party/mihomo-party
-    chmod +sx ${pkgdir}/opt/mihomo-party/resources/sidecar/mihomo
-    chmod +sx ${pkgdir}/opt/mihomo-party/resources/sidecar/mihomo-alpha
+    chmod +x ${pkgdir}/opt/mihomo-purity/mihomo-purity
+    chmod +sx ${pkgdir}/opt/mihomo-purity/resources/sidecar/mihomo
+    chmod +sx ${pkgdir}/opt/mihomo-purity/resources/sidecar/mihomo-alpha
     install -Dm755 "${srcdir}/../${_pkgname}.sh" "${pkgdir}/usr/bin/${_pkgname}"
-    sed -i '3s!/opt/mihomo-party/mihomo-party!mihomo-party!' "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+    sed -i '3s!/opt/mihomo-purity/mihomo-purity!mihomo-purity!' "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
 
     chown -R root:root ${pkgdir}
 }

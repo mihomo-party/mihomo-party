@@ -9,6 +9,6 @@ _blue="${_bold}$(tput setaf 4)"
 _yellow="${_bold}$(tput setaf 3)"
 
 post_install() {
-    note "Custom flags should be put directly in: ~/.config/mihomo-party-flags.conf"
-    note "The launcher is called: 'mihomo-party'"
+    note "Custom flags should be put directly in: ~/.config/mihomo-purity-flags.conf"
+    note "The launcher is called: 'mihomo-purity'"
 }

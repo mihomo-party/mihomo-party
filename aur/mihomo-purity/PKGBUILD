@@ -1,13 +1,13 @@
-pkgname=mihomo-party
+pkgname=mihomo-purity
 pkgver=0.1.3
 pkgrel=1
 pkgdesc="Another Mihomo GUI."
 arch=('x86_64' 'aarch64')
-url="https://github.com/mihomo-party/mihomo-party"
+url="https://github.com/mihomo-purity/mihomo-purity"
 license=('GPL3')
 conflicts=("$pkgname-git" "$pkgname-bin" "$pkgname-electron" "$pkgname-electron-bin")
 depends=('gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs' 'libsecret')
-optdepends=('libappindicator-gtk3: Allow mihomo-party to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
+optdepends=('libappindicator-gtk3: Allow mihomo-purity to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
 makedepends=('nodejs' 'pnpm' 'libxcrypt-compat')
 install=$pkgname.install
 source=(
@@ -20,7 +20,7 @@ options=('!lto')
 
 prepare(){
     cd $srcdir/${pkgname}-${pkgver}
-    sed -i "s/productName: Mihomo Party/productName: mihomo-party/" electron-builder.yml
+    sed -i "s/productName: Mihomo Purity/productName: mihomo-purity/" electron-builder.yml
     pnpm install
 }
 
@@ -31,13 +31,13 @@ build(){
 
 package() {
 	cd $srcdir/${pkgname}-${pkgver}/dist
-    bsdtar -xf mihomo-party-linux-${pkgver}*.deb
+    bsdtar -xf mihomo-purity-linux-${pkgver}*.deb
     bsdtar -xf data.tar.xz -C "${pkgdir}/"
-    chmod +x ${pkgdir}/opt/mihomo-party/mihomo-party
-    chmod +sx ${pkgdir}/opt/mihomo-party/resources/sidecar/mihomo
-    chmod +sx ${pkgdir}/opt/mihomo-party/resources/sidecar/mihomo-alpha
+    chmod +x ${pkgdir}/opt/mihomo-purity/mihomo-purity
+    chmod +sx ${pkgdir}/opt/mihomo-purity/resources/sidecar/mihomo
+    chmod +sx ${pkgdir}/opt/mihomo-purity/resources/sidecar/mihomo-alpha
     install -Dm755 "${srcdir}/../${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
-    sed -i '3s!/opt/mihomo-party/mihomo-party!mihomo-party!' "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    sed -i '3s!/opt/mihomo-purity/mihomo-purity!mihomo-purity!' "${pkgdir}/usr/share/applications/${pkgname}.desktop"
 
     chown -R root:root ${pkgdir}
 }

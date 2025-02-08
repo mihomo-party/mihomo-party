@@ -2,17 +2,17 @@
 
 if type update-alternatives 2>/dev/null >&1; then
     # Remove previous link if it doesn't use update-alternatives
-    if [ -L '/usr/bin/mihomo-party' -a -e '/usr/bin/mihomo-party' -a "`readlink '/usr/bin/mihomo-party'`" != '/etc/alternatives/mihomo-party' ]; then
-        rm -f '/usr/bin/mihomo-party'
+    if [ -L '/usr/bin/mihomo-purity' -a -e '/usr/bin/mihomo-purity' -a "`readlink '/usr/bin/mihomo-purity'`" != '/etc/alternatives/mihomo-purity' ]; then
+        rm -f '/usr/bin/mihomo-purity'
     fi
-    update-alternatives --install '/usr/bin/mihomo-party' 'mihomo-party' '/opt/mihomo-party/mihomo-party' 100 || ln -sf '/opt/mihomo-party/mihomo-party' '/usr/bin/mihomo-party'
+    update-alternatives --install '/usr/bin/mihomo-purity' 'mihomo-purity' '/opt/mihomo-purity/mihomo-purity' 100 || ln -sf '/opt/mihomo-purity/mihomo-purity' '/usr/bin/mihomo-purity'
 else
-    ln -sf '/opt/mihomo-party/mihomo-party' '/usr/bin/mihomo-party'
+    ln -sf '/opt/mihomo-purity/mihomo-purity' '/usr/bin/mihomo-purity'
 fi
 
-chmod 4755 '/opt/mihomo-party/chrome-sandbox' || true
-chmod +sx /opt/mihomo-party/resources/sidecar/mihomo
-chmod +sx /opt/mihomo-party/resources/sidecar/mihomo-alpha
+chmod 4755 '/opt/mihomo-purity/chrome-sandbox' || true
+chmod +sx /opt/mihomo-purity/resources/sidecar/mihomo
+chmod +sx /opt/mihomo-purity/resources/sidecar/mihomo-alpha
 
 if hash update-mime-database 2>/dev/null; then
     update-mime-database /usr/share/mime || true

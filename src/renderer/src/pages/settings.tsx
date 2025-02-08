@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
             title="官方文档"
             className="app-nodrag"
             onPress={() => {
-              window.open('https://mihomo-party.github.io')
+              window.open('https://mihomo-purity.github.io')
             }}
           >
             <CgWebsite className="text-lg" />
@@ -35,7 +35,7 @@ const Settings: React.FC = () => {
             className="app-nodrag"
             title="GitHub 仓库"
             onPress={() => {
-              window.open('https://github.com/mihomo-party/mihomo-party')
+              window.open('https://github.com/mihomo-purity/mihomo-purity')
             }}
           >
             <IoLogoGithub className="text-lg" />

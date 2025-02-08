@@ -44,7 +44,7 @@ const UpdaterModal: React.FC<Props> = (props) => {
             size="sm"
             className="flex app-nodrag"
             onPress={() => {
-              open(`https://github.com/mihomo-party/mihomo-party/releases/tag/v${version}`)
+              open(`https://github.com/mihomo-purity/mihomo-purity/releases/tag/v${version}`)
             }}
           >
             前往下载

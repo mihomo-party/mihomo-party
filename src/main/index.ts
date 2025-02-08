@@ -33,10 +33,10 @@ if (process.platform === 'win32' && !is.dev && !process.argv.includes('noadmin')
       } else {
         writeFileSync(path.join(taskDir(), 'param.txt'), 'empty')
       }
-      if (!existsSync(path.join(taskDir(), 'mihomo-party-run.exe'))) {
-        throw new Error('mihomo-party-run.exe not found')
+      if (!existsSync(path.join(taskDir(), 'mihomo-purity-run.exe'))) {
+        throw new Error('mihomo-purity-run.exe not found')
       } else {
-        execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-party-run')
+        execSync('%SystemRoot%\\System32\\schtasks.exe /run /tn mihomo-purity-run')
       }
     } catch (e) {
       let createErrorStr = `${createError}`
@@ -120,7 +120,7 @@ powerMonitor.on('shutdown', async () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('io.github.mihomo-party')
+  electronApp.setAppUserModelId('io.github.mihomo-purity')
   try {
     await initPromise
   } catch (e) {

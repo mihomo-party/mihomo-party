@@ -97,7 +97,7 @@ const MihomoConfig: React.FC = () => {
               try {
                 const url = await getGistUrl()
                 if (url !== '') {
-                  await navigator.clipboard.writeText(`${url}/raw/mihomo-party.yaml`)
+                  await navigator.clipboard.writeText(`${url}/raw/mihomo-purity.yaml`)
                 }
               } catch (e) {
                 alert(e)

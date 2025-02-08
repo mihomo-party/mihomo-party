@@ -47,12 +47,12 @@ export async function setupFirewall(): Promise<void> {
   const removeCommand = `
   Remove-NetFirewallRule -DisplayName "mihomo" -ErrorAction SilentlyContinue
   Remove-NetFirewallRule -DisplayName "mihomo-alpha" -ErrorAction SilentlyContinue
-  Remove-NetFirewallRule -DisplayName "Mihomo Party" -ErrorAction SilentlyContinue
+  Remove-NetFirewallRule -DisplayName "Mihomo Purity" -ErrorAction SilentlyContinue
   `
   const createCommand = `
   New-NetFirewallRule -DisplayName "mihomo" -Direction Inbound -Action Allow -Program "${mihomoCorePath('mihomo')}" -Enabled True -Profile Any -ErrorAction SilentlyContinue
   New-NetFirewallRule -DisplayName "mihomo-alpha" -Direction Inbound -Action Allow -Program "${mihomoCorePath('mihomo-alpha')}" -Enabled True -Profile Any -ErrorAction SilentlyContinue
-  New-NetFirewallRule -DisplayName "Mihomo Party" -Direction Inbound -Action Allow -Program "${exePath()}" -Enabled True -Profile Any -ErrorAction SilentlyContinue
+  New-NetFirewallRule -DisplayName "Mihomo Purity" -Direction Inbound -Action Allow -Program "${exePath()}" -Enabled True -Profile Any -ErrorAction SilentlyContinue
   `
 
   if (process.platform === 'win32') {
@@ -95,7 +95,7 @@ const elevateTaskXml = `<?xml version="1.0" encoding="UTF-16"?>
   </Settings>
   <Actions Context="Author">
     <Exec>
-      <Command>"${path.join(taskDir(), `mihomo-party-run.exe`)}"</Command>
+      <Command>"${path.join(taskDir(), `mihomo-purity-run.exe`)}"</Command>
       <Arguments>"${exePath()}"</Arguments>
     </Exec>
   </Actions>
@@ -103,14 +103,14 @@ const elevateTaskXml = `<?xml version="1.0" encoding="UTF-16"?>
 `
 
 export function createElevateTask(): void {
-  const taskFilePath = path.join(taskDir(), `mihomo-party-run.xml`)
+  const taskFilePath = path.join(taskDir(), `mihomo-purity-run.xml`)
   writeFileSync(taskFilePath, Buffer.from(`\ufeff${elevateTaskXml}`, 'utf-16le'))
   copyFileSync(
-    path.join(resourcesFilesDir(), 'mihomo-party-run.exe'),
-    path.join(taskDir(), 'mihomo-party-run.exe')
+    path.join(resourcesFilesDir(), 'mihomo-purity-run.exe'),
+    path.join(taskDir(), 'mihomo-purity-run.exe')
   )
   execSync(
-    `%SystemRoot%\\System32\\schtasks.exe /create /tn "mihomo-party-run" /xml "${taskFilePath}" /f`
+    `%SystemRoot%\\System32\\schtasks.exe /create /tn "mihomo-purity-run" /xml "${taskFilePath}" /f`
   )
 }
 

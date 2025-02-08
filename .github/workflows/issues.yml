@@ -15,7 +15,7 @@ jobs:
           app_id: ${{ secrets.BOT_APP_ID }}
           private_key: ${{ secrets.BOT_PRIVATE_KEY }}
       - name: Review Issues
-        uses: mihomo-party/universal-assistant@v1.0.3
+        uses: mihomo-purity/universal-assistant@v1.0.3
         with:
           github_token: ${{ steps.generate.outputs.token }}
           openai_base_url: ${{ secrets.OPENAI_BASE_URL }}
