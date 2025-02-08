@@ -296,3 +296,70 @@ jobs:
           files: latest.yml
           body_path: changelog.md
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  aur-release-updater:
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgname:
+          - mihomo-purity-electron-bin
+          - mihomo-purity-electron
+          - mihomo-purity-bin
+          - mihomo-purity
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Update Version
+        run: |
+          sed -i "s/pkgver=.*/pkgver=$(echo ${{ github.ref }} | tr -d 'refs/tags/v')/" aur/${{ matrix.pkgname }}/PKGBUILD
+      - name: Update Checksums
+        if: matrix.pkgname == 'mihomo-purity' || matrix.pkgname == 'mihomo-purity-electron'
+        run: |
+          wget https://github.com/mihomo-purity/mihomo-purity/archive/refs/tags/$(echo ${{ github.ref }} | tr -d 'refs/tags/').tar.gz -O release.tar.gz
+          sed -i "s/sha256sums=.*/sha256sums=(\"$(sha256sum ./release.tar.gz | awk '{print $1}')\"/" aur/mihomo-purity/PKGBUILD
+          sed -i "s/sha256sums=.*/sha256sums=(\"$(sha256sum ./release.tar.gz | awk '{print $1}')\"/" aur/mihomo-purity-electron/PKGBUILD
+      - name: Update Checksums
+        if: matrix.pkgname == 'mihomo-purity-bin' || matrix.pkgname == 'mihomo-purity-electron-bin'
+        run: |
+          wget https://github.com/mihomo-purity/mihomo-purity/releases/download/$(echo ${{ github.ref }} | tr -d 'refs/tags/')/mihomo-purity-linux-$(echo ${{ github.ref }} | tr -d 'refs/tags/v')-amd64.deb -O amd64.deb
+          wget https://github.com/mihomo-purity/mihomo-purity/releases/download/$(echo ${{ github.ref }} | tr -d 'refs/tags/')/mihomo-purity-linux-$(echo ${{ github.ref }} | tr -d 'refs/tags/v')-arm64.deb -O arm64.deb
+          sed -i "s/sha256sums_x86_64=.*/sha256sums_x86_64=(\"$(sha256sum ./amd64.deb | awk '{print $1}')\")/" aur/mihomo-purity-bin/PKGBUILD
+          sed -i "s/sha256sums_aarch64=.*/sha256sums_aarch64=(\"$(sha256sum ./arm64.deb | awk '{print $1}')\")/" aur/mihomo-purity-bin/PKGBUILD
+          sed -i "s/sha256sums_x86_64=.*/sha256sums_x86_64=(\"$(sha256sum ./amd64.deb | awk '{print $1}')\")/" aur/mihomo-purity-electron-bin/PKGBUILD
+          sed -i "s/sha256sums_aarch64=.*/sha256sums_aarch64=(\"$(sha256sum ./arm64.deb | awk '{print $1}')\")/" aur/mihomo-purity-electron-bin/PKGBUILD
+      - name: Publish AUR package
+        uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
+        with:
+          pkgname: ${{ matrix.pkgname }}
+          pkgbuild: aur/${{ matrix.pkgname }}/PKGBUILD
+          commit_username: Cinnamoroll404
+          commit_email: 198187913+Cinnamoroll404@users.noreply.github.com
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa,ed25519
+          allow_empty_commits: false
+
+  aur-git-updater:
+    if: startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: update version
+        run: |
+          sed -i "s/pkgver=.*/pkgver=$(git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | tr -d 'v')/" aur/mihomo-purity-git/PKGBUILD
+      - name: Publish AUR package
+        uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
+        with:
+          pkgname: mihomo-purity-git
+          pkgbuild: aur/mihomo-purity-git/PKGBUILD
+          commit_username: Cinnamoroll404
+          commit_email: 198187913+Cinnamoroll404@users.noreply.github.com
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa,ed25519
+          allow_empty_commits: false
