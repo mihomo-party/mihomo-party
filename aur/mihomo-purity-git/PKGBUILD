@@ -1,18 +1,18 @@
 pkgname=mihomo-purity-git
 _pkgname=${pkgname%-git}
-pkgver=0.1.3.r5.g5f5d6dd
+pkgver=1.7.0
 pkgrel=1
-pkgdesc="Another Mihomo GUI."
+pkgdesc="A purer mihomo party fork"
 arch=('x86_64' 'aarch64')
 url="https://github.com/mihomo-purity/mihomo-purity"
 license=('GPL3')
 conflicts=("$_pkgname" "$_pkgname-bin" "$_pkgname-electron" "$_pkgname-electron-bin")
-depends=('gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs' 'libsecret')
+depends=('gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs')
 optdepends=('libappindicator-gtk3: Allow mihomo-purity to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
 makedepends=('nodejs' 'pnpm' 'jq' 'libxcrypt-compat')
 install=$_pkgname.install
 source=("${_pkgname}.sh" "git+$url.git")
-sha256sums=("f8049c1f26d5a92fbcebd7bebbdedbb3eab53422b21cf6127418251ccd061282" "SKIP")
+sha256sums=("e390f9bbce3ae680ab9413f83c69e22c193b43a506439253bdf1e71a0050c938" "SKIP")
 options=('!lto')
 
 pkgver() {

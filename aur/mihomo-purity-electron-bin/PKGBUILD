@@ -2,12 +2,12 @@ pkgname=mihomo-purity-electron-bin
 _pkgname=mihomo-purity
 pkgver=0.2.2
 pkgrel=1
-pkgdesc="Another Mihomo GUI."
+pkgdesc="A purer mihomo party fork"
 arch=('x86_64' 'aarch64')
 url="https://github.com/mihomo-purity/mihomo-purity"
 license=('GPL3')
 conflicts=("$_pkgname" "$_pkgname-git" "$_pkgname-bin" "$_pkgname-electron")
-depends=('electron' 'gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs' 'libsecret')
+depends=('electron' 'gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core' 'util-linux-libs')
 optdepends=('libappindicator-gtk3: Allow mihomo-purity to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
 makedepends=('asar')
 install=$_pkgname.install
@@ -15,11 +15,11 @@ source=("${_pkgname}.desktop" "${_pkgname}.sh")
 source_x86_64=("${_pkgname}-${pkgver}-x86_64.deb::${url}/releases/download/v${pkgver}/mihomo-purity-linux-${pkgver}-amd64.deb")
 source_aarch64=("${_pkgname}-${pkgver}-aarch64.deb::${url}/releases/download/v${pkgver}/mihomo-purity-linux-${pkgver}-arm64.deb")
 sha256sums=(
-    "96a6250f67517493f839f964c024434dbcf784b25a73f074bb505f1521f52844"
-    "560733f0e5bd9b47ff50c849301c8a22ae17a5df26830d8c97033dfcbd392382"
+    "9fb03735d230efe35f79fdb94aea5ff1002c1dcb78ab38209b4b2764d17f3f4b"
+    "973c19f294dea534035c299ffb46a45efe6def53f8f28510e7427628e821ac13"
 )
-sha256sums_x86_64=("43f8b9a5818a722cdb8e5044d2a90993274860b0da96961e1a2652169539ce39")
-sha256sums_aarch64=("18574fdeb01877a629aa52ac0175335ce27c83103db4fcb2f1ad69e3e42ee10f")
+sha256sums_x86_64=("2bd08ea0d388cf1a65e7026361c3c2db6e10641bb8a8850f4bb03aa138884f20")
+sha256sums_aarch64=("9c992c530d86b95ff90c90e3f9281b2e7e6bbc08375f4a628c6cf9715b573b2c")
 options=('!lto')
 
 package() {
