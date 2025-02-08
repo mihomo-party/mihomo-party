@@ -4,7 +4,7 @@ import { NavigateFunction, useLocation, useNavigate, useRoutes } from 'react-rou
 import OutboundModeSwitcher from '@renderer/components/sider/outbound-mode-switcher'
 import SysproxySwitcher from '@renderer/components/sider/sysproxy-switcher'
 import TunSwitcher from '@renderer/components/sider/tun-switcher'
-import { Button, Divider } from '@nextui-org/react'
+import { Button, Divider } from '@heroui/react'
 import { IoSettings } from 'react-icons/io5'
 import routes from '@renderer/routes'
 import {
@@ -471,8 +471,7 @@ export const firstDriver = driver({
       element: 'none',
       popover: {
         title: '教程结束',
-        description:
-          '现在您已经了解了软件的基本用法，导入您的订阅开始使用吧，祝您使用愉快！\n您还可以加入我们的官方 <a href="https://t.me/mihomo_party_group" target="_blank">Telegram 群组</a> 获取最新资讯',
+        description: '现在您已经了解了软件的基本用法，导入您的订阅开始使用吧，祝您使用愉快',
         side: 'top',
         align: 'center',
         onNextClick: async (): Promise<void> => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import SettingCard from '../base/base-setting-card'
 import SettingItem from '../base/base-setting-item'
-import { RadioGroup, Radio } from '@nextui-org/react'
+import { RadioGroup, Radio } from '@heroui/react'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 const titleMap = {
   sysproxyCardStatus: '系统代理',

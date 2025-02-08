@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { ReactNode } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
@@ -16,15 +16,6 @@ const ErrorFallback = ({ error }: FallbackProps): JSX.Element => {
         onPress={() => open('https://github.com/mihomo-party/mihomo-party/issues/new/choose')}
       >
         GitHub
-      </Button>
-      <Button
-        size="sm"
-        color="primary"
-        variant="flat"
-        className="ml-2"
-        onPress={() => open('https://t.me/mihomo_party_group')}
-      >
-        Telegram
       </Button>
 
       <Button

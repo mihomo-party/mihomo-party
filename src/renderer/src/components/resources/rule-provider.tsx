@@ -9,7 +9,7 @@ import { Fragment, useEffect, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import SettingCard from '../base/base-setting-card'
 import SettingItem from '../base/base-setting-item'
-import { Button, Chip } from '@nextui-org/react'
+import { Button, Chip } from '@heroui/react'
 import { IoMdRefresh } from 'react-icons/io'
 import { CgLoadbarDoc } from 'react-icons/cg'
 import { MdEditDocument } from 'react-icons/md'
@@ -27,7 +27,7 @@ const RuleProvider: React.FC = () => {
     if (showDetails.title) {
       const fetchProviderPath = async (name: string): Promise<void> => {
         try {
-          const providers= await getRuntimeConfig()
+          const providers = await getRuntimeConfig()
           const provider = providers['rule-providers'][name]
           if (provider) {
             setShowDetails((prev) => ({

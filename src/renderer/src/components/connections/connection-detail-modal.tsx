@@ -9,7 +9,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem
-} from '@nextui-org/react'
+} from '@heroui/react'
 import React from 'react'
 import SettingItem from '../base/base-setting-item'
 import { calcTraffic } from '@renderer/utils/calc'
@@ -31,60 +31,67 @@ const CopyableSettingItem: React.FC<{
     domain.split('.').length <= 2
       ? [domain]
       : domain
-        .split('.')
-        .map((_, i, parts) => parts.slice(i).join('.'))
-        .slice(0, -1)
+          .split('.')
+          .map((_, i, parts) => parts.slice(i).join('.'))
+          .slice(0, -1)
   const isIPv6 = (ip: string) => ip.includes(':')
 
   const menuItems = [
     { key: 'raw', text: displayName || (Array.isArray(value) ? value.join(', ') : value) },
     ...(Array.isArray(value)
-      ? value.map((v, i) => {
-          const p = prefix[i]
-          if (!p || !v) return null
-  
-          if (p === 'DOMAIN-SUFFIX') {
-            return getSubDomains(v).map((subV) => ({
-              key: `${p},${subV}`,
-              text: `${p},${subV}`
-            }))
-          }
-  
-          if (p === 'IP-ASN' || p === 'SRC-IP-ASN') {
-            return {
-              key: `${p},${v.split(' ')[0]}`,
-              text: `${p},${v.split(' ')[0]}`
+      ? value
+          .map((v, i) => {
+            const p = prefix[i]
+            if (!p || !v) return null
+
+            if (p === 'DOMAIN-SUFFIX') {
+              return getSubDomains(v).map((subV) => ({
+                key: `${p},${subV}`,
+                text: `${p},${subV}`
+              }))
             }
-          }
-  
-          const suffix = (p === 'IP-CIDR' || p === 'SRC-IP-CIDR') ? (isIPv6(v) ? '/128' : '/32') : ''
-          return {
-            key: `${p},${v}${suffix}`,
-            text: `${p},${v}${suffix}`
-          }
-        }).filter(Boolean).flat()
-      : prefix.map(p => {
-          const v = value as string
-          if (p === 'DOMAIN-SUFFIX') {
-            return getSubDomains(v).map((subV) => ({
-              key: `${p},${subV}`,
-              text: `${p},${subV}`
-            }))
-          }
-  
-          if (p === 'IP-ASN' || p === 'SRC-IP-ASN') {
-            return {
-              key: `${p},${v.split(' ')[0]}`,
-              text: `${p},${v.split(' ')[0]}`
+
+            if (p === 'IP-ASN' || p === 'SRC-IP-ASN') {
+              return {
+                key: `${p},${v.split(' ')[0]}`,
+                text: `${p},${v.split(' ')[0]}`
+              }
             }
-          }
-  
-          const suffix = (p === 'IP-CIDR' || p === 'SRC-IP-CIDR') ? (isIPv6(v) ? '/128' : '/32') : ''
-          return {
-            key: `${p},${v}${suffix}`,
-            text: `${p},${v}${suffix}`
-          }
-        }).flat())
+
+            const suffix =
+              p === 'IP-CIDR' || p === 'SRC-IP-CIDR' ? (isIPv6(v) ? '/128' : '/32') : ''
+            return {
+              key: `${p},${v}${suffix}`,
+              text: `${p},${v}${suffix}`
+            }
+          })
+          .filter(Boolean)
+          .flat()
+      : prefix
+          .map((p) => {
+            const v = value as string
+            if (p === 'DOMAIN-SUFFIX') {
+              return getSubDomains(v).map((subV) => ({
+                key: `${p},${subV}`,
+                text: `${p},${subV}`
+              }))
+            }
+
+            if (p === 'IP-ASN' || p === 'SRC-IP-ASN') {
+              return {
+                key: `${p},${v.split(' ')[0]}`,
+                text: `${p},${v.split(' ')[0]}`
+              }
+            }
+
+            const suffix =
+              p === 'IP-CIDR' || p === 'SRC-IP-CIDR' ? (isIPv6(v) ? '/128' : '/32') : ''
+            return {
+              key: `${p},${v}${suffix}`,
+              text: `${p},${v}${suffix}`
+            }
+          })
+          .flat())
   ]
 
   return (

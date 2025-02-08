@@ -6,7 +6,7 @@ import {
   ModalFooter,
   Button,
   Input
-} from '@nextui-org/react'
+} from '@heroui/react'
 import React, { useState } from 'react'
 
 interface Props {

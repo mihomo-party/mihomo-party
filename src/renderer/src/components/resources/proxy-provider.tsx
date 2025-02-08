@@ -8,7 +8,7 @@ import Viewer from './viewer'
 import useSWR from 'swr'
 import SettingCard from '../base/base-setting-card'
 import SettingItem from '../base/base-setting-item'
-import { Button, Chip } from '@nextui-org/react'
+import { Button, Chip } from '@heroui/react'
 import { IoMdRefresh } from 'react-icons/io'
 import { CgLoadbarDoc } from 'react-icons/cg'
 import { MdEditDocument } from 'react-icons/md'
@@ -27,7 +27,7 @@ const ProxyProvider: React.FC = () => {
     if (showDetails.title) {
       const fetchProviderPath = async (name: string): Promise<void> => {
         try {
-          const providers= await getRuntimeConfig()
+          const providers = await getRuntimeConfig()
           const provider = providers['proxy-providers'][name]
           if (provider) {
             setShowDetails((prev) => ({
@@ -48,7 +48,7 @@ const ProxyProvider: React.FC = () => {
   const providers = useMemo(() => {
     if (!data) return []
     return Object.values(data.providers)
-      .filter(provider => 'subscriptionInfo' in provider)
+      .filter((provider) => 'subscriptionInfo' in provider)
       .sort((a, b) => {
         if (a.vehicleType === 'File' && b.vehicleType !== 'File') {
           return -1
