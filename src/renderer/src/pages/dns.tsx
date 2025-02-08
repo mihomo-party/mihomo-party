@@ -11,7 +11,7 @@ import React, { Key, ReactNode, useState } from 'react'
 const DNS: React.FC = () => {
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
   const { appConfig, patchAppConfig } = useAppConfig()
-  const { nameserverPolicy, useNameserverPolicy } = appConfig || {}
+  const { hosts, nameserverPolicy, useNameserverPolicy } = appConfig || {}
   const { dns } = controledMihomoConfig || {}
   const {
     ipv6 = false,
@@ -54,7 +54,7 @@ const DNS: React.FC = () => {
       domain,
       value
     })),
-    hosts: useHosts ? [] : undefined
+    hosts: useHosts ? hosts : undefined
   })
 
   const setValues = (v: typeof values): void => {
@@ -119,7 +119,8 @@ const DNS: React.FC = () => {
       nameserverPolicy: Object.fromEntries(
         values.nameserverPolicy.map(({ domain, value }) => [domain, value])
       ),
-      useNameserverPolicy: values.useNameserverPolicy
+      useNameserverPolicy: values.useNameserverPolicy,
+      hosts: values.hosts
     })
     try {
       setChanged(false)
@@ -320,7 +321,7 @@ const DNS: React.FC = () => {
             size="sm"
             isSelected={values.useHosts}
             onValueChange={(v) => {
-              setValues({ ...values, useHosts: v, hosts: v ? [] : undefined })
+              setValues({ ...values, useHosts: v })
             }}
           />
         </SettingItem>

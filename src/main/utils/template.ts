@@ -17,6 +17,7 @@ export const defaultConfig: IAppConfig = {
   controlDns: true,
   controlSniff: true,
   nameserverPolicy: {},
+  hosts: [],
   siderOrder: [
     'sysproxy',
     'tun',

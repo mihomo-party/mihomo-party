@@ -256,6 +256,11 @@ interface ISysProxyConfig {
   pacScript?: string
 }
 
+interface IHost {
+  domain: string
+  value: string | string[]
+}
+
 interface IAppConfig {
   core: 'mihomo' | 'mihomo-alpha'
   disableLoopbackDetector: boolean
@@ -325,6 +330,7 @@ interface IAppConfig {
   webdavPassword?: string
   useNameserverPolicy: boolean
   nameserverPolicy: { [key: string]: string | string[] }
+  hosts: IHost[]
   showWindowShortcut?: string
   showFloatingWindowShortcut?: string
   triggerSysProxyShortcut?: string
