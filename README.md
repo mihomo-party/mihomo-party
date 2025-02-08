@@ -4,11 +4,9 @@
 </h3>
 
 <h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI</h3>
-
-<div align='center'>
-<img width='90%' src="./images/preview.jpg">
-</div>
-
+<h3 align="center">一个更加纯净的 <a href="https://github.com/mihomo-party-org/mihomo-party">Mihomo Party</a> 分支</h3>
+<h3 align="center">本项目基于 <a href="https://github.com/mihomo-party-org/mihomo-party/commit/857132fcdbea195b30142623940bf5bf95cde5c1">Mihomo Party 1.5.13</a> 进行开发维护</h3>
+<h3 align="center"><a href="./EXPLANATION.md">为什么会有这个项目？</a></h3>
 ### 特性
 
 - [x] 开箱即用，无需服务模式的 Tun
